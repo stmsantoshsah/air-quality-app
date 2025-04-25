@@ -2,7 +2,7 @@
 'use client'; // This directive is essential for using hooks and event handlers
 
 import React, { useState, useCallback } from 'react';
-import { Row, Col, Spin, Alert, Typography, Empty } from 'antd';
+import { Row, Col, Spin, Alert, Empty } from 'antd';
 import dynamic from 'next/dynamic'; // Required for dynamically importing client components
 
 // Import Child Components

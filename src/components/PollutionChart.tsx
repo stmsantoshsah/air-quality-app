@@ -3,11 +3,10 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Card, Typography } from 'antd';
+import { Card } from 'antd';
 import type { ApexOptions } from 'apexcharts'; // Import ApexOptions type
 import { AQIData } from '@/lib/types'; // Assuming AQIData is defined in your types
 
-const { Title } = Typography;
 
 // Dynamically import ReactApexChart to avoid SSR issues
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });

@@ -1,6 +1,6 @@
 // src/components/PollutantDetails.tsx
 import React from 'react';
-import { Card, List, Typography, Row, Col } from 'antd';
+import { Card, List, Typography } from 'antd';
 import { AQIData } from '@/lib/types';
 
 const { Text } = Typography;

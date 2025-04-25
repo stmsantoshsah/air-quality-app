@@ -1,6 +1,5 @@
 // src/lib/api.ts
 import { AirPollutionResponse, CurrentWeatherResponse, AQIData, WeatherData } from './types';
-import { kelvinToCelsius } from './utils';
 
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';

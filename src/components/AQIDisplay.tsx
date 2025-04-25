@@ -4,7 +4,7 @@ import { Card, Statistic, Tag, Typography, Row, Col } from 'antd';
 import { AQIData } from '@/lib/types';
 import { getAQIDetails } from '@/lib/utils';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 interface AQIDisplayProps {
   data: AQIData;
