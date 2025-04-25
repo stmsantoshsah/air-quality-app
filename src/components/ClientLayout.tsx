@@ -21,7 +21,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         </div>
       </Content>
       <Footer style={{ textAlign: 'center', backgroundColor: '#f0f2f5' }}>
-        Air Quality App ©{new Date().getFullYear()} - Data provided by OpenWeatherMap
+        Air Quality App ©{new Date().getFullYear()} - Santosh Sah
       </Footer>
     </Layout>
   );
