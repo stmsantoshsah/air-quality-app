@@ -1,7 +1,7 @@
 // src/components/AirQualityClient.tsx
 'use client';
 
-import React, { useState, useCallback } from 'react'; // Removed useEffect as it wasn't used
+import React, { useState, useCallback } from 'react';
 import { Row, Col, Spin, Alert, Typography, Empty } from 'antd';
 import dynamic from 'next/dynamic';
 
@@ -83,9 +83,9 @@ export default function AirQualityClient() {
           }
         } else {
           console.log("Weather fetch successful but returned no data.");
-          // Fix: Check currentLocationName state here
+          // Use state here
           if (finalAqiData && !currentLocationName.startsWith('Fetching')) {
-             // Keep potentially existing name if weather failed
+             // Keep name
           } else {
              setCurrentLocationName(locationName || 'Location name unavailable');
           }
@@ -93,9 +93,9 @@ export default function AirQualityClient() {
       } else {
         console.error("Weather Fetch Error:", weatherResult.reason);
         fetchError = (fetchError ? fetchError + '\n' : '') + 'Failed to fetch weather data.';
-        // Fix: Check currentLocationName state here
+         // Use state here
         if (!currentLocationName.startsWith('Fetching')) {
-             // Keep potentially existing name if weather failed
+            // Keep name
         } else {
              setCurrentLocationName(locationName || 'Location name unavailable');
         }
@@ -111,11 +111,10 @@ export default function AirQualityClient() {
         setCurrentLocationName('');
       }
 
-    } catch (err: unknown) { // Fix 1: Use unknown instead of any
+    } catch (err: unknown) { // Use unknown
       console.error("Unexpected error during data fetching:", err);
-      // Fix 1: Type check before accessing message
       let message = 'An unexpected error occurred.';
-      if (err instanceof Error) {
+      if (err instanceof Error) { // Type check
           message = err.message;
       }
       setError(message);
@@ -125,8 +124,7 @@ export default function AirQualityClient() {
     } finally {
       setLoading(false);
     }
-    // Fix 2: Add missing dependency
-  }, [currentLocationName]); // <-- Add currentLocationName here
+  }, [currentLocationName]); // Add dependency
 
   const handleGeolocate = useCallback(() => {
     if (!navigator.geolocation) {
@@ -172,11 +170,10 @@ export default function AirQualityClient() {
         setCurrentLocationName('');
         setLoading(false);
       }
-    } catch (err: unknown) { // Fix 3: Use unknown instead of any
+    } catch (err: unknown) { // Use unknown
       console.error("Search failed (fetching coordinates):", err);
-      // Fix 3: Type check before accessing message
       let message = `An error occurred while searching for "${city}".`;
-      if (err instanceof Error) {
+      if (err instanceof Error) { // Type check
           message = err.message;
       }
       setError(message);

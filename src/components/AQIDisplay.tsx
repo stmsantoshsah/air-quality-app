@@ -1,8 +1,8 @@
 // src/components/AQIDisplay.tsx
 import React from 'react';
 import { Card, Statistic, Tag, Typography, Row, Col } from 'antd';
-import { AQIData } from '@/lib/types';
-import { getAQIDetails } from '@/lib/utils';
+import { AQIData, AQIDetails } from '@/lib/types';
+import { getAQIDetails} from '@/lib/utils'; // Ensure AQIDetails is imported
 
 const { Text } = Typography;
 
@@ -11,16 +11,27 @@ interface AQIDisplayProps {
 }
 
 const AQIDisplay: React.FC<AQIDisplayProps> = ({ data }) => {
-  const aqiDetails = getAQIDetails(data.aqi);
+  let aqiDetails: AQIDetails;
+  let displayAqiValue: number | string = 'N/A';
+
+  if (typeof data.aqi === 'number' && !isNaN(data.aqi)) {
+      aqiDetails = getAQIDetails(data.aqi);
+      displayAqiValue = data.aqi;
+  } else {
+      console.warn("AQIDisplay: Invalid or missing AQI value in data:", data);
+      aqiDetails = { level: 'Unknown', color: 'default', advice: 'AQI value is unavailable.' };
+  }
 
   return (
-    <Card title="Air Quality Index (AQI)" variant="borderless">
+    <Card
+      title="Air Quality Index (AQI)"
+      variant="borderless" // Changed from bordered={false}
+    >
        <Row justify="center" align="middle" gutter={[16, 16]}>
             <Col xs={24} sm={12} style={{ textAlign: 'center' }}>
-                {/* Displaying the OWM AQI value and its corresponding level */}
                  <Statistic title="Current AQI Level" value={aqiDetails.level} />
                  <Tag color={aqiDetails.color} style={{ fontSize: '1.2em', padding: '5px 10px', marginTop: '10px' }}>
-                    {aqiDetails.level} (Index: {data.aqi})
+                    {aqiDetails.level} (Index: {displayAqiValue})
                  </Tag>
             </Col>
              <Col xs={24} sm={12} style={{ textAlign: 'center' }}>
@@ -29,7 +40,6 @@ const AQIDisplay: React.FC<AQIDisplayProps> = ({ data }) => {
                  <Text strong>Location:</Text> <Text>{data.cityName || 'Current Location'}</Text>
              </Col>
         </Row>
-
     </Card>
   );
 };
