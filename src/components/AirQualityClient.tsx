@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
-import { Row, Col, Spin, Alert, Typography, Empty } from 'antd';
+import { Row, Col, Spin, Alert, Empty } from 'antd';
 import dynamic from 'next/dynamic';
 
 // Import Child Components
